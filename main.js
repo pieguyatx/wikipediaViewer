@@ -3,5 +3,9 @@ $(document).ready(function(){
   $("#search").on("click", function(){
     // fill in code
     console.log("button clicked"); //debug
+    // call API data
+    // parse data; distribute into boxes
+    // allow draggability: http://api.jqueryui.com/draggable/
+    // inform user of draggability, clickability (popup? snackbar?)
   });
 });
