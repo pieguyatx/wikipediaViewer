@@ -24,14 +24,22 @@
     </header>
 
     <main>
-      <div>
-        <div>Search box goes here</div>
-        <button id="search">with button</button>
-        <button id="random">Random Search</button>
-      </div>
-      <div>
+
+      <section id="search">
+        <div id="searchCustom">
+          <label for="searchInput">Search</label>
+          <input type="text" id="searchInput" name="search" placeholder="Enter your search terms.">
+          <button id="search">with button</button>
+        </div>
+        <div id="searchRandom">
+          <button id="random">Random Search</button>
+        </div>
+      </section>
+
+      <section id="results">
         Results to be displayed here w/ flexbox
-      </div>
+      </section>
+
     </main>
 
     <footer>

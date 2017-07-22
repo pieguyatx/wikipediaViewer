@@ -22,6 +22,9 @@ header h1{
 header h2{
   font-size: 1.4em;
 }
+section{
+  margin: 25px;
+}
 footer{
   font-family: 'Oxygen', sans-serif;
   margin: 20px;
