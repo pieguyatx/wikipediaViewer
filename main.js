@@ -1,3 +1,5 @@
+var limit = 8; // number of entries to obtain
+
 $(document).ready(function(){
 
   // search wikipedia on keyboard press (enter/return)
@@ -25,7 +27,6 @@ $(document).ready(function(){
 // search for user's custom input terms
 function searchCustom(){
   // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
-  var limit = 8; // number of entries to obtain
   var searchTerms = document.getElementById("searchInput").value;
   console.log('Button clicked. Searching for: ' + searchTerms); // debug
   var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerms + "&limit=" + limit + "&namespace=0&format=json&callback=?&redirects=resolve";
@@ -35,12 +36,24 @@ function searchCustom(){
       document.getElementById("searchInput").value = "Sorry, please try again.";
     }
     else{
-      console.log(searchData); //debug
       // parse data; distribute into boxes
+      showSearchData(searchData);
     }
   });
 }
 
 // parse data; distribute into boxes
+function showSearchData(searchData){
+  console.log(searchData); //debug
+  for(let i=0; i<searchData[1].length; i++){
+    var output = "<article class='entry'><h3>%TITLE%</h3><p>%INFO%</p><p>%LINK%</p></article>";
+    output = output.replace("%TITLE%",searchData[1][i]);
+    output = output.replace("%INFO%",searchData[2][i]);
+    var linkstr = "<a href='"+searchData[3][i]+"' target='_blank' title='Visit Wikipedia article (opens in new window)'>Learn more...</a>";
+    output = output.replace("%LINK%",linkstr);
+    $("#results").append(output);
+  }
+}
+
 // allow draggability: http://api.jqueryui.com/draggable/
 // inform user of draggability, clickability (popup? snackbar?)
