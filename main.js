@@ -44,13 +44,30 @@ function searchCustom(){
 
 // parse data; distribute into boxes
 function showSearchData(searchData){
-  console.log(searchData); //debug
+  // console.log("User search terms: " + searchData); //debug
   for(let i=0; i<searchData[1].length; i++){
+    // get text data
     var output = "<article class='entry'><h3>%TITLE%</h3><p>%INFO%</p><p>%LINK%</p></article>";
     output = output.replace("%TITLE%",searchData[1][i]);
     output = output.replace("%INFO%",searchData[2][i]);
     var linkstr = "<a href='"+searchData[3][i]+"' target='_blank' title='Visit Wikipedia article (opens in new window)'>Learn more...</a>";
     output = output.replace("%LINK%",linkstr);
+    // get image data
+    /*
+    var imageAPI = "https://en.wikipedia.org/w/api.php?action=query&titles=" + searchData[1][i] + "&prop=pageimages&format=json&pithumbsize=100&redirects=resolve&callback=?";
+    console.log(imageAPI);
+    $.getJSON(imageAPI, function(imageData){
+      var url = imageData.query.pages[0].thumbnail.source;
+        console.log("Image output: " + url); // debug
+      if(url){ // if image url found...
+        output = output.replace("<img src='" + url + "' alt='Thumbnail for article' title='Image from article on " + searchData[1][i] + "'>");
+
+      } else {
+        output = output.replace("%IMAGE%","");
+      }
+    });
+    */
+    // output results to user
     $("#results").append(output);
   }
 }
