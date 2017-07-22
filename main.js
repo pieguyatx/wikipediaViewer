@@ -2,9 +2,17 @@ $(document).ready(function(){
   // search wikipedia on click
   $("#searchButton").on("click", function(){
     // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
-    var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=usa&limit=10&namespace=0&format=json&callback=?&redirects=resolve";
+    var limit = 8; // number of entries to obtain
+    var searchTerms = document.getElementById("searchInput").value;
+    console.log('Button clicked. Searching for: ' + searchTerms); // debug
+    var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerms + "&limit=" + limit + "&namespace=0&format=json&callback=?&redirects=resolve";
     $.getJSON(searchAPI, function(searchData){
-      console.log(searchData); //debug
+      if(searchData.hasOwnProperty("error")){
+        console.log("Invalid search terms"); // debug
+      }
+      else{
+        console.log(searchData); //debug
+      }
     });
     // call API data: https://www.mediawiki.org/wiki/API:Main_page
     // parse data; distribute into boxes
