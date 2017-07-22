@@ -30,15 +30,17 @@ function searchCustom(){
   console.log('Button clicked. Searching for: ' + searchTerms); // debug
   var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerms + "&limit=" + limit + "&namespace=0&format=json&callback=?&redirects=resolve";
   $.getJSON(searchAPI, function(searchData){
-    if(searchData.hasOwnProperty("error")){
+    if(searchData.hasOwnProperty("error")||searchData[1].length==0){
       console.log("Invalid search terms"); // debug
+      document.getElementById("searchInput").value = "Sorry, please try again.";
     }
     else{
       console.log(searchData); //debug
+      // parse data; distribute into boxes
     }
   });
-  // call API data: https://www.mediawiki.org/wiki/API:Main_page
-  // parse data; distribute into boxes
-  // allow draggability: http://api.jqueryui.com/draggable/
-  // inform user of draggability, clickability (popup? snackbar?)
 }
+
+// parse data; distribute into boxes
+// allow draggability: http://api.jqueryui.com/draggable/
+// inform user of draggability, clickability (popup? snackbar?)
