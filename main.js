@@ -2,7 +2,7 @@ $(document).ready(function(){
   // search wikipedia on click
   $("#searchButton").on("click", function(){
     // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
-    var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=api&limit=10&namespace=0&format=json&callback=?";
+    var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=usa&limit=10&namespace=0&format=json&callback=?&redirects=resolve";
     $.getJSON(searchAPI, function(searchData){
       console.log(searchData); //debug
     });
