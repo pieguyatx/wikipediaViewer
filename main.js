@@ -27,6 +27,8 @@ $(document).ready(function(){
 
 // search for user's custom input terms
 function searchCustom(){
+  // clear results screen
+  $("#results").html("");
   // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
   var searchTerms = document.getElementById("searchInput").value;
   console.log('Button clicked. Searching for: ' + searchTerms); // debug
