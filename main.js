@@ -1,21 +1,21 @@
-var limit = 4; // number of entries to obtain
+var limit = 6; // number of entries to obtain
 
 $(document).ready(function(){
 
   // search wikipedia on keyboard press (enter/return)
   $("#searchInput").on('keyup', function (e) {
     if (e.keyCode == 13) {
-      searchCustom();
+      searchInput();
     }
   });
 
   // search wikipedia on click
   $("#searchButton").on("click", function(){
-    searchCustom();
+    searchInput();
   });
 
   // search wikipedia randomly on click
-  $("#random").on("click", function(){
+  $("#randomButton").on("click", function(){
     // fill in code
     console.log("random button clicked"); //debug
     // call API data: https://en.wikipedia.org/wiki/Special:Random
@@ -25,12 +25,18 @@ $(document).ready(function(){
 
 });
 
+// Read in user search terms
+function searchInput(){
+  var searchTerms = document.getElementById("searchInput").value;
+  // search for terms on wikipedia
+  searchCustom(searchTerms);
+}
+
 // search for user's custom input terms
-function searchCustom(){
+function searchCustom(searchTerms){
   // clear results screen
   $("#results").html("");
   // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
-  var searchTerms = document.getElementById("searchInput").value;
   console.log('Button clicked. Searching for: ' + searchTerms); // debug
   var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerms + "&limit=" + limit + "&namespace=0&format=json&callback=?&redirects=resolve";
   $.getJSON(searchAPI, function(searchData){
@@ -103,7 +109,12 @@ function showSearchData(searchData){
 }
 
 function searchRandom(){
-  // https://en.wikipedia.org/wiki/Special:ApiSandbox#action=query&format=json&list=random&rnnamespace=0&rnfilterredir=nonredirects&rnlimit=8
+  var randAPI = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&redirects=1&rnnamespace=0&rnfilterredir=nonredirects&rnlimit=1&callback=?";
+  $.getJSON(randAPI, function(randData){
+    var randTitle = randData.query.random[0].title;
+    console.log(randData); // debug
+    searchCustom(randTitle);
+  });
 }
 
 // allow draggability: http://api.jqueryui.com/draggable/
