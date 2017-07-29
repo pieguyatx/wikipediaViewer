@@ -1,4 +1,4 @@
-var limit = 8; // number of entries to obtain
+var limit = 4; // number of entries to obtain
 
 $(document).ready(function(){
 
@@ -20,6 +20,7 @@ $(document).ready(function(){
     console.log("random button clicked"); //debug
     // call API data: https://en.wikipedia.org/wiki/Special:Random
     // use similar functions as previously defined to display data
+    searchRandom();
   });
 
 });
@@ -45,31 +46,62 @@ function searchCustom(){
 // parse data; distribute into boxes
 function showSearchData(searchData){
   // console.log("User search terms: " + searchData); //debug
+  // Prepare the text data
+  var imageTitle = [];
+  var output = [];
   for(let i=0; i<searchData[1].length; i++){
     // get text data
-    var output = "<article class='entry'><h3>%TITLE%</h3><p>%INFO%</p><p>%LINK%</p></article>";
-    output = output.replace("%TITLE%",searchData[1][i]);
-    output = output.replace("%INFO%",searchData[2][i]);
+    output.push("<article class='entry'><h3>%TITLE%</h3>%IMAGE%<p>%INFO%</p><p>%LINK%</p></article>");
+    output[i] = output[i].replace("%TITLE%",searchData[1][i]);
+    output[i] = output[i].replace("%INFO%",searchData[2][i]);
     var linkstr = "<a href='"+searchData[3][i]+"' target='_blank' title='Visit Wikipedia article (opens in new window)'>Learn more...</a>";
-    output = output.replace("%LINK%",linkstr);
-    // get image data
-    /*
-    var imageAPI = "https://en.wikipedia.org/w/api.php?action=query&titles=" + searchData[1][i] + "&prop=pageimages&format=json&pithumbsize=100&redirects=resolve&callback=?";
-    console.log(imageAPI);
-    $.getJSON(imageAPI, function(imageData){
-      var url = imageData.query.pages[0].thumbnail.source;
-        console.log("Image output: " + url); // debug
-      if(url){ // if image url found...
-        output = output.replace("<img src='" + url + "' alt='Thumbnail for article' title='Image from article on " + searchData[1][i] + "'>");
-
-      } else {
-        output = output.replace("%IMAGE%","");
-      }
-    });
-    */
-    // output results to user
-    $("#results").append(output);
+    output[i] = output[i].replace("%LINK%",linkstr);
+    // Prepare the image URLs
+    // format title for query string; replace spaces
+    imageTitle.push(searchData[1][i].replace(/\s+/g,"%20"));
   }
+  // get image data related to text data
+  var imageTitles = imageTitle.join("|"); // link titles into one string for single query
+  var imageAPI = "https://en.wikipedia.org/w/api.php?action=query&titles=" + imageTitles + "&prop=pageimages&format=json&pithumbsize=100&redirects=resolve&callback=?";
+  $.ajax({
+    url: imageAPI,
+    dataType: "json",
+    success: function(imageData) { // if image data is found,
+      // console.log(imageData.query.pages); // debug
+      // Get the image URLs
+      for(let j=0; j<searchData[1].length; j++){
+        // Check if URL can be found.
+        if(imageData.query.pages[Object.keys(imageData.query.pages)[j]] && imageData.query.pages[Object.keys(imageData.query.pages)[j]].hasOwnProperty("thumbnail")){
+          // if URL exists...
+          var url = imageData.query.pages[Object.keys(imageData.query.pages)[j]].thumbnail.source;
+          // match the title from the image to the proper text
+          var imageTitleAPI = imageData.query.pages[Object.keys(imageData.query.pages)[j]].title;
+          for(let k=0; k<searchData[1].length; k++){
+            if(searchData[1][k]==imageTitleAPI){
+              output[k] = output[k].replace("%IMAGE%","<img src='" + url + "' alt='Thumbnail for article' title='Image from article on " + imageTitleAPI + "'>");
+              break;
+            }
+          }
+        }
+      }
+      // console.log(output); // debug
+      showResult(output);
+    },
+    error: function(){
+      showResult(output);
+    }
+  });
+  function showResult(output){
+    // console.log(outputHTML); //debug
+    for (let i=0; i<searchData[1].length; i++){
+      output[i] = output[i].replace("%IMAGE%",""); // replace image placeholders
+      $("#results").append(output[i]); // output results to user
+    }
+  }
+}
+
+function searchRandom(){
+  // https://en.wikipedia.org/wiki/Special:ApiSandbox#action=query&format=json&list=random&rnnamespace=0&rnfilterredir=nonredirects&rnlimit=8
 }
 
 // allow draggability: http://api.jqueryui.com/draggable/
