@@ -20,6 +20,8 @@ header h1{
 }
 header h2{
   font-size: 1.4em;
+  margin-top: -0.4em;
+  margin-left: 114px;
 }
 section{
   margin: 25px;
@@ -48,9 +50,28 @@ footer{
   margin: 20px;
 }
 
+/* Mobile responsiveness */
 @media only screen and (min-width: 768px) {
   section#results article{
     max-width: 25%;
+  }
+}
+@media only screen and (max-width: 530px) {
+  header h2{
+    margin-top: 5px;
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 420px){
+  header h1{
+    font-size: 3em;
+    margin: 0;
+    margin-bottom: -.3em;
+  }
+  header h2{
+    font-size: 1.4em;
+    padding: 0;
+    margin-top: 14px;
   }
 }
 
@@ -72,16 +93,4 @@ footer{
   -webkit-animation-duration:0.5s;
   -moz-animation-duration:0.5s;
   animation-duration:0.5s;
-}
-
-@media only screen and (max-width: 420px){
-  header h1{
-    font-size: 3em;
-    margin: 0;
-    margin-bottom: -.3em;
-  }
-  header h2{
-    font-size: 1.4em;
-    padding: 0;
-  }
 }
