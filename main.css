@@ -2,7 +2,7 @@ body{
   text-align: center;
   color: white;
   background-color: #470b15;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Oxygen', sans-serif;
 }
 a {
   text-decoration: none;
@@ -13,6 +13,9 @@ a:hover{
 }
 header{
   margin-top: 20px;
+}
+h1, h2, h3{
+  font-family: 'Josefin Slab', serif;
 }
 header h1{
   font-size: 4em;
@@ -26,34 +29,53 @@ header h2{
 section{
   margin: 25px;
 }
-section#results{
+#results{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
 }
-section#results article{
+#results article{
   min-width: 280px;
   margin: 10px;
-  padding: 10px;
+  padding: 25px;
   border: solid 2px black;
   border-radius: 10px;
   background-color: floralwhite;
   color: black;
 }
-section#results article img{
+#results article h3{
+  font-weight: bold;
+  font-size: 1.6em;
+}
+#results article img{
   border-radius: 5px;
+  float: right;
+  margin: 10px;
+}
+#results article p{
+  text-align: left;
+}
+.learnMore{
+  text-align: left;
+  font-size: 0.9em;
+}
+.learnMore a{
+  color: #66a0ff;
+  font-style: italic;
+}
+.learnMore a:hover{
+  color: #e8ad5a;
 }
 footer{
-  font-family: 'Oxygen', sans-serif;
   margin: 20px;
 }
 
 /* Mobile responsiveness */
 @media only screen and (min-width: 768px) {
   section#results article{
-    max-width: 25%;
+    max-width: 300px;
   }
 }
 @media only screen and (max-width: 530px) {

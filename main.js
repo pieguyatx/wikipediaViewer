@@ -59,7 +59,7 @@ function showSearchData(searchData){
   var output = [];
   for(let i=0; i<searchData[1].length; i++){
     // get text data
-    output.push("<article class='entry'><h3>%TITLE%</h3>%IMAGE%<p>%INFO%</p><p>%LINK%</p></article>");
+    output.push("<article class='entry'><h3>%TITLE%</h3>%IMAGE%<p>%INFO%</p><div class='learnMore'>%LINK%</div></article>");
     output[i] = output[i].replace("%TITLE%",searchData[1][i]);
     output[i] = output[i].replace("%INFO%",searchData[2][i]);
     var linkstr = "<a href='"+searchData[3][i]+"' target='_blank' title='Visit Wikipedia article (opens in new window)'>Learn more...</a>";
