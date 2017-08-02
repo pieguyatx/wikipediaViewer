@@ -58,10 +58,11 @@ section{
 #searchMain input{
   font-size: 2em;
   width: 600px;
-  height: 50px;
-  border-radius: 10px;
+  height: 75px;
+  border-radius: 4px;
   background-color: #effffb;
   font-family: 'Muli', sans-serif;
+  text-align: center;
 }
 #searchMain input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #cecece;
@@ -143,10 +144,42 @@ footer{
     max-width: 300px;
   }
 }
+@media only screen and (max-width: 768px) {
+  body{
+    margin: 0;
+  }
+  #search{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #search > div{
+    width: 100%;
+    border-radius: 0;
+  }
+  #searchMain label{
+    font-size: 1.5em;
+  }
+  #searchMain input{
+    font-size: 1.5em;
+    width: 480px;
+    height: 60px;
+  }
+  #searchButtons button{
+    font-size: 1.5em;
+    width: 235px;
+    height: 40px;
+  }
+}
 @media only screen and (max-width: 530px) {
   header h2{
     margin-top: 5px;
     margin-left: 0;
+  }
+  #searchMain input{
+    width: 300px;
+  }
+  #searchButtons button{
+    width: 300px;
   }
 }
 @media only screen and (max-width: 420px){
