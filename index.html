@@ -12,7 +12,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="favicon.ico"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab|Oxygen" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab|Oxygen|Muli" rel="stylesheet">
     <link href="main.css" rel="stylesheet">
 
   </head>
@@ -27,13 +27,19 @@
     <main>
 
       <section id="search">
-        <div id="searchCustom">
-          <label for="searchInput">What's on your mind?</label>
-          <input type="text" id="searchInput" name="search" placeholder="Enter your search terms.">
-          <button id="searchButton">Search</button>
-        </div>
-        <div id="searchRandom">
-          <button id="randomButton">Random Search</button>
+        <div>
+          <div id="searchMain">
+            <div>
+              <label for="searchInput">What topic is on your mind?</label>
+            </div>
+            <div>
+              <input type="text" id="searchInput" name="search" placeholder="Enter your search topic here.">
+            </div>
+          </div>
+          <div id="searchButtons">
+            <button id="searchButton">Search</button>
+            <button id="randomButton">Random Search</button>
+          </div>
         </div>
       </section>
 

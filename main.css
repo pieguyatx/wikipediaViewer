@@ -1,8 +1,12 @@
 body{
   text-align: center;
   color: white;
-  background-color: #470b15;
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Muli', sans-serif;
+  background: #75262a; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#470b15, #75262a); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#470b15, #75262a); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#470b15, #75262a); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#470b15, #75262a); /* Standard syntax (must be last) */
 }
 a {
   text-decoration: none;
@@ -12,7 +16,7 @@ a:hover{
   color: rgb(250, 245, 105);
 }
 header{
-  margin-top: 20px;
+  margin: 40px 0 40px 0;
 }
 h1, h2, h3{
   font-family: 'Josefin Slab', serif;
@@ -29,6 +33,65 @@ header h2{
 section{
   margin: 25px;
 }
+#search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#search > div{
+  padding: 0 10px 10px 10px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.2);
+}
+#searchMain{
+  display: block;
+}
+#searchMain > div{
+  margin: 5px;
+}
+#searchMain label{
+  font-size: 2em;
+  margin: 5px;
+  color: #baffda;
+  font-family: 'Muli', sans-serif;
+}
+#searchMain input{
+  font-size: 2em;
+  width: 600px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #effffb;
+  font-family: 'Muli', sans-serif;
+}
+#searchMain input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #cecece;
+}
+#searchMain input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #cecece;
+   opacity:  1;
+}
+#searchMain input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #cecece;
+   opacity:  1;
+}
+#searchMain input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #cecece;
+}
+#searchMain input::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #cecece;
+}
+#searchButtons button{
+  font-size: 2em;
+  width: 296px;
+  height: 50px;
+  margin: 5px 2.5px 5px 2.5px;
+  border-radius: 10px;
+  background-color: #baffda;
+  font-family: 'Muli', sans-serif;
+}
+button#randomButton{
+  background-color: #ffebba;
+}
 #results{
   display: flex;
   flex-wrap: wrap;
@@ -40,14 +103,14 @@ section{
   min-width: 280px;
   margin: 10px;
   padding: 25px;
-  border: solid 2px black;
+  border: solid 2px #540c0c;
   border-radius: 10px;
   background-color: floralwhite;
   color: black;
 }
 #results article h3{
   font-weight: bold;
-  font-size: 1.6em;
+  font-size: 2em;
 }
 #results article img{
   border-radius: 5px;
@@ -56,6 +119,7 @@ section{
 }
 #results article p{
   text-align: left;
+  font-size: 1.3em;
 }
 .learnMore{
   text-align: left;
@@ -70,6 +134,7 @@ section{
 }
 footer{
   margin: 20px;
+  font-family: 'Oxygen', sans-serif;
 }
 
 /* Mobile responsiveness */
