@@ -105,6 +105,10 @@ function showSearchData(searchData){
       output[i] = output[i].replace("%IMAGE%",""); // replace image placeholders
       $("#results").append(output[i]); // output results to user
     }
+    // make results draggable on desktops w/ large screens only
+    if($(window).width() >= 1024){
+      addDrag();
+    }
   }
 }
 
@@ -118,4 +122,15 @@ function searchRandom(){
 }
 
 // allow draggability: http://api.jqueryui.com/draggable/
-// inform user of draggability, clickability (popup? snackbar?)
+function addDrag(){
+  // add draggability to all articles
+  $( function() {
+    $( "article.entry" ).addClass("ui-widget-content").draggable();
+  } );
+  // inform user of draggability, clickability (popup? snackbar?)
+  var x = document.getElementById("snackbar");
+  // Add the "show" class to DIV
+  x.className = "show";
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
