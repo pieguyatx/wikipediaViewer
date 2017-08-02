@@ -17,7 +17,7 @@ $(document).ready(function(){
   // search wikipedia randomly on click
   $("#randomButton").on("click", function(){
     // fill in code
-    console.log("random button clicked"); //debug
+    //console.log("random button clicked"); //debug
     // call API data: https://en.wikipedia.org/wiki/Special:Random
     // use similar functions as previously defined to display data
     searchRandom();
@@ -37,11 +37,11 @@ function searchCustom(searchTerms){
   // clear results screen
   $("#results").html("");
   // get user search terms using Opensearch API: https://www.mediawiki.org/wiki/API:Opensearch
-  console.log('Button clicked. Searching for: ' + searchTerms); // debug
+  //console.log('Button clicked. Searching for: ' + searchTerms); // debug
   var searchAPI = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchTerms + "&limit=" + limit + "&namespace=0&format=json&callback=?&redirects=resolve";
   $.getJSON(searchAPI, function(searchData){
     if(searchData.hasOwnProperty("error")||searchData[1].length==0){
-      console.log("Invalid search terms"); // debug
+      //console.log("Invalid search terms"); // debug
       document.getElementById("searchInput").value = "Sorry, please try again.";
     }
     else{
@@ -116,7 +116,7 @@ function searchRandom(){
   var randAPI = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&redirects=1&rnnamespace=0&rnfilterredir=nonredirects&rnlimit=1&callback=?";
   $.getJSON(randAPI, function(randData){
     var randTitle = randData.query.random[0].title;
-    console.log(randData); // debug
+    //console.log(randData); // debug
     searchCustom(randTitle);
   });
 }
