@@ -113,6 +113,7 @@ function showSearchData(searchData){
 }
 
 function searchRandom(){
+  $("#searchInput").val("");
   var randAPI = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&redirects=1&rnnamespace=0&rnfilterredir=nonredirects&rnlimit=1&callback=?";
   $.getJSON(randAPI, function(randData){
     var randTitle = randData.query.random[0].title;
